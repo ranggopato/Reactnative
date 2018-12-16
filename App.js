@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, StyleSheet, Text, View, TextInput } from "react-native";
+import { TouchableOpacity, Button, StyleSheet, Text, View, TextInput } from "react-native";
 
 
 export default class App extends React.Component {
@@ -10,11 +10,17 @@ export default class App extends React.Component {
       places: []
     }
   }
+
   
   butin = () => {
     let nArray = this.state.places.slice();
-    nArray.push(this.state.placeName);
+    nArray.push(this.state.placeName)
     this.setState({ places: nArray });
+  }
+  hapus = (index) => {
+    let copynArray = Object.assign([],this.state.places);
+    copynArray.splice(index,1);
+    this.setState({places : copynArray});
   }
 
   render() {
@@ -34,12 +40,13 @@ export default class App extends React.Component {
           <Button title="add" style={styles.button} onPress={this.butin} />
         </View>
         <View style={styles.list}>
-        {this.state.places.map((place)=>{return <Text>{place}</Text>})}
+        {this.state.places.map((place, index)=>{return <Button onPress={this.hapus.bind(this, index)} title={place}></Button>})}
         </View>
       </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
