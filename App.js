@@ -7,16 +7,14 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       placeName: "",
-      placeWk: []
-    };
+      places: []
+    }
   }
-
-  butin() {
-    var nArray = this.state.placeWk.slice();
+  
+  butin = () => {
+    let nArray = this.state.places.slice();
     nArray.push(this.state.placeName);
-    this.setState({
-      placeWk: nArray
-    });
+    this.setState({ places: nArray });
   }
 
   render() {
@@ -32,14 +30,12 @@ export default class App extends React.Component {
             }
             value={this.state.placeName}
             style={styles.textinput}
-          />{" "}
-          <Button title="add" style={styles.button} onPress={this.butin} />{" "}
-        </View>{" "}
+          />
+          <Button title="add" style={styles.button} onPress={this.butin} />
+        </View>
         <View style={styles.list}>
-          {this.state.placeWk.map(placeName => {
-            return <Text>{placeName} </Text>;
-          })}
-        </View>{" "}
+        {this.state.places.map((place)=>{return <Text>{place}</Text>})}
+        </View>
       </View>
     );
   }
@@ -47,6 +43,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 30,
     width: "100%",
     flexDirection: "row",
     backgroundColor: "#fff",
